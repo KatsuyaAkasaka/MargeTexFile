@@ -8,8 +8,8 @@ import(
 	"flag"
 )
 func main(){
-	mainName := flag.String("m", "main.tex", "main file")
-	outputName := flag.String("o", "bachelor-thesis.tex", "output file")
+	mainName := flag.String("m", "master.tex", "master file")
+	outputName := flag.String("o", "dist.tex", "output file")
 	flag.Parse()
 
 	file, err := os.Open(*mainName)
@@ -37,11 +37,17 @@ func main(){
 				fmt.Printf("failed to open file")
 			}
 			scanner := bufio.NewScanner(subfile)
+			
+			isActive := false
 			for scanner.Scan() {
 				subtext := scanner.Text()
-				if strings.Contains(subtext, "documentclass") ||
-				strings.Contains(subtext, "begin{document}") ||
-				strings.Contains(subtext, "end{document}") {
+				if strings.Contains(subtext, "begin{document}") {
+					isActive = true
+				}
+				if strings.Contains(subtext, "end{document}") {
+					isActive = false
+				}
+				if !isActive {
 					continue
 				}
 				sumText += (subtext + "\n")
