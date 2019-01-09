@@ -9,7 +9,7 @@ When you use subfile, you couldn't use `\ref{hoge}` to refer `\label{hoge}` writ
 download this script and just execute
 
 ```
-go run MargeTex.go -m ]path/to/master.tex] -o [path/to/output.tex]
+go run MargeTex.go -m [path/to/master.tex] -o [path/to/output.tex]
 ```
 if `master.tex` call subfiles like `\subfile{path/to/subfile.tex}` whether or not including `\ref` which is not refer correctly, a large file `output.tex`will be created based on `master.tex` and expanded `subfile.tex` expanded with resolving `\ref`, `\label`.
 
